@@ -58,20 +58,20 @@ double lerTaxaPercentual(const char *mensagem)
 double lerTaxaAoDia(const char *mensagem)
 {
     double taxa;
-    char unidade[20];
+    char unidade[4];
     int leitura;
 
     do {
         printf("%s", mensagem);
-        printf("Exemplos: 1%%a.d, 1%%a.m ou 1%%a.a\n");
-        leitura = scanf("%lf%19s", &taxa, unidade);
+        printf("Exemplos: x%% a.d, x%% a.m ou x%% a.a\n");
+        leitura = scanf("%lf%*c%*c%4s", &taxa, unidade);
 
         if (leitura != 2) {
             printf("Entrada invalida. Digite no formato 1%%a.a.\n");
             limparBuffer();
-        } else if (strcmp(unidade, "%a.d") != 0 &&
-                   strcmp(unidade, "%a.m") != 0 &&
-                   strcmp(unidade, "%a.a") != 0) {
+        } else if (strcmp(unidade, "a.d") != 0 &&
+                   strcmp(unidade, "a.m") != 0 &&
+                   strcmp(unidade, "a.a") != 0) {
             printf("Unidade invalida. Use %%a.d, %%a.m ou %%a.a.\n");
             leitura = 0;
             limparBuffer();
@@ -81,9 +81,9 @@ double lerTaxaAoDia(const char *mensagem)
     limparBuffer();
     taxa = taxa / 100.0;
 
-    if (strcmp(unidade, "%a.m") == 0) {
+    if (strcmp(unidade, "a.m") == 0) {
         taxa = taxa / 30.0;
-    } else if (strcmp(unidade, "%a.a") == 0) {
+    } else if (strcmp(unidade, "a.a") == 0) {
         taxa = taxa / 360.0;
     }
 
@@ -93,13 +93,13 @@ double lerTaxaAoDia(const char *mensagem)
 double lerTempoEmDias(const char *mensagem)
 {
     double tempo;
-    char unidade[20];
+    char unidade[5];
     int leitura;
 
     do {
         printf("%s", mensagem);
         printf("Exemplos: 10 dias, 10 meses ou 10 anos\n");
-        leitura = scanf("%lf%19s", &tempo, unidade);
+        leitura = scanf("%lf%*c%5s", &tempo, unidade);
 
         if (leitura != 2) {
             printf("Entrada invalida. Digite no formato 10 anos.\n");
